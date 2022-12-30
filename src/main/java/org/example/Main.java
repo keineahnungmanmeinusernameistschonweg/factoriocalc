@@ -29,10 +29,10 @@ public abstract class Main {
 
             //Get amount
             System.out.print("\nPlease enter the number of assemblers: ");
-            var amountPerMinute = scanner.nextInt();
+            var assemblers = scanner.nextInt();
 
 
-            deconstruct(component, amountPerMinute);
+            deconstruct(component, assemblers);
             printResults();
         }
 
@@ -50,8 +50,6 @@ public abstract class Main {
             double aggregateDemand = scAmount * amount;
             double amountOfAssemblers = (aggregateDemand * cProduceTime) / scProduceTime;
 
-            //System.out.println(scName + " : " + amountOfAssemblers);
-
             if (billOfMaterials.containsKey(scName)) {
                 var cumulativeAssemblerCount = billOfMaterials.get(scName) + amountOfAssemblers;
                 billOfMaterials.put(scName, cumulativeAssemblerCount);
@@ -59,7 +57,7 @@ public abstract class Main {
                 billOfMaterials.put(scName, amountOfAssemblers);
             }
 
-            deconstruct(scObject, aggregateDemand);
+            deconstruct(scObject, amountOfAssemblers);
         }
     }
 
@@ -77,7 +75,7 @@ public abstract class Main {
                 "                                                               \n");
         System.out.println("--------------------------------------------------------------");
         for (var a : billOfMaterials.entrySet()) {
-            System.out.format("%-25s %-4.1f ~ %d Assembler\n", a.getKey(), a.getValue(), (int) Math.ceil(a.getValue()));
+            System.out.format("%-25s %-12.10f ~ %d Assembler\n", a.getKey(), a.getValue(), (int) Math.ceil(a.getValue()));
         }
         System.out.println("--------------------------------------------------------------");
     }
@@ -145,6 +143,6 @@ public abstract class Main {
      * @return components per time
      */
     private static double r(double input) {
-        return 1 / input;
+        return 1.0d / input;
     }
 }

@@ -9,5 +9,8 @@
         <module name="factoriocalc" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="factoriocalc" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>
