@@ -6,6 +6,8 @@ import java.util.Scanner;
 public abstract class Main {
     private static final HashMap<String, Component> components = new HashMap<>();
     private static final HashMap<String, Double> billOfMaterials = new HashMap<>();
+    private static int assemblers;
+    private static String componentName;
 
     public static void main(String[] args) {
         initialize();
@@ -26,16 +28,17 @@ public abstract class Main {
                 input = scanner.next();
             }
             var component = components.get(input);
+            componentName = component.name;
 
             //Get amount
-            System.out.print("\nPlease enter the number of assemblers: ");
-            var assemblers = scanner.nextInt();
+            System.out.print("Please enter the number of assemblers: ");
+            assemblers = scanner.nextInt();
+
 
 
             deconstruct(component, assemblers);
             printResults();
         }
-
     }
 
     private static void deconstruct(Component component, double amount) {
@@ -73,9 +76,10 @@ public abstract class Main {
                 "$$/   $$/  $$$$$$$/ $$$$$$$/   $$$$$$/  $$/    $$$$/ $$$$$$$/  \n" +
                 "                                                               \n" +
                 "                                                               \n");
+        System.out.format("For %d %s assembler(s)\n", assemblers, componentName);
         System.out.println("--------------------------------------------------------------");
         for (var a : billOfMaterials.entrySet()) {
-            System.out.format("%-25s %-12.10f ~ %d Assembler\n", a.getKey(), a.getValue(), (int) Math.ceil(a.getValue()));
+            System.out.format("%-25s %-12.10f ~ %d assembler(s)\n", a.getKey(), a.getValue(), (int) Math.ceil(a.getValue()));
         }
         System.out.println("--------------------------------------------------------------");
     }
