@@ -18,4 +18,13 @@ class Component {
         subComponents.put(name, amount);
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Component{" +
+                "name='" + name + '\'' +
+                ", time=" + time +
+                ", subComponents=" + subComponents +
+                '}';
+    }
 }
